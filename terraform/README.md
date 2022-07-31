@@ -38,16 +38,18 @@ export AWS_REGION=eu-central-1
 ## AWS CLI examples
 ### S3
 ```shell
-aws --endpoint-url http://localhost:4566 s3 cp README.md s3://test-bucket/
+aws --region eu-central-1 --endpoint-url http://localhost:4566 s3 cp README.md s3://test-bucket/
 ```
 
 ## StepFunctions
 ```shell
-aws --endpoint-url http://localhost:4566 stepfunctions list-state-machines
+aws --region eu-central-1 --endpoint-url http://localhost:4566 stepfunctions list-state-machines
 ```
 
 ## DynamoDb
 
 ```shell
-aws --endpoint-url http://localhost:4566 dynamodb scan --table-name Files
+aws --region eu-central-1 --endpoint-url http://localhost:4566 dynamodb scan --table-name Files
+
+aws --region eu-central-1 --endpoint-url http://localhost:4566 dynamodb list-tables
 ```

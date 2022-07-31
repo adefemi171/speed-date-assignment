@@ -4,3 +4,6 @@ temp
 .venv/
 .env/
 .DS_Store
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup

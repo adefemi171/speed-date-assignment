@@ -1,0 +1,26 @@
+version: '2.1'
+services:
+  localstack:
+    container_name: localstack
+    image: localstack/localstack-full
+    ports:
+      - "4566:4566"
+      - "4571:4571"
+      - "8082:8082"
+    environment:
+      - USE_LIGHT_IMAGE=0
+      - DEBUG=0
+      - PORT_WEB_UI=8082
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - HOST_TMP_FOLDER=${TMPDIR}
+      - START_WEB=1
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+  cfn-nag:
+    container_name: cfn-nag
+    image: stelligent/cfn_nag
+    volumes:
+      - "./stack.template:/templates/stack.template"
+    command: 
+      - /templates/stack.template

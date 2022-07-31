@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Cloudformation template for creating AWS S3 Bucket
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: Name for s3 bucket (Name must begin and end with a letter or number and consist only of lowercase letters, numbers, and hyphens (-).)
+    AllowedPattern: (?=^.{3,63}$)^[a-z0-9][a-z0-9-]*[a-z0-9]
+    ConstraintDescription: Name must begin and end with a letter or number and consist only of lowercase letters, numbers, and hyphens (-).
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      BucketName: !Sub ${BucketName}-s3
+
+Outputs:
+  BucketARN:
+    Description: The arn for the bucket that got created
+    Value: !GetAtt S3Bucket.Arn

@@ -13,6 +13,33 @@ Resources:
     Type: AWS::S3::Bucket
     Properties: 
       BucketName: !Sub ${BucketName}-s3
+      BucketEncryption: 
+        ServerSideEncryptionConfiguration: 
+        - ServerSideEncryptionByDefault:
+            SSEAlgorithm: AES256
+      LoggingConfiguration:
+        DestinationBucketName: !Ref S3Bucket
+        LogFilePrefix: s3-bucket-logs
+
+  S3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Statement:
+          -
+            Action:
+              - s3:GetObject
+              - s3:PutObject
+              - s3:DeleteObject
+            Effect: Allow
+            Resource:
+              - !Sub arn:aws:s3:::${S3Bucket}
+              - !Sub arn:aws:s3:::${S3Bucket}/adefemi/*
+            Principal:
+              AWS:
+                - 'sts:AssumeRole'
+
 
 Outputs:
   BucketARN:

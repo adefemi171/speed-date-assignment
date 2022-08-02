@@ -53,3 +53,15 @@ aws --region eu-central-1 --endpoint-url http://localhost:4566 dynamodb scan --t
 
 aws --region eu-central-1 --endpoint-url http://localhost:4566 dynamodb list-tables
 ```
+
+## CloudWatchLog
+
+```shell
+aws --region eu-central-1 --endpoint-url http://localhost:4566 logs describe-log-groups
+
+aws --region eu-central-1 --endpoint-url http://localhost:4566 logs describe-log-streams --log-group-name '/aws/lambda/s3_lambda_function'
+
+"logGroupName": "/aws/lambda/s3_lambda_function",
+
+aws --region eu-central-1 --endpoint-url http://localhost:4566 logs get-log-events --log-group-name '/aws/lambda/s3_lambda_function'
+```
